@@ -1,0 +1,26 @@
+<h1>Day 38</h1>
+
+<form [formGroup]="form" (submit)="upload()">
+    <table>
+        <tr>
+            <td>Title: </td>
+            <td>
+                <input type="text" size="30" formControlName="title">
+            </td>
+        </tr>
+        <tr>
+            <td>File: </td>
+            <td>
+                <input type="file" formControlName="file" #imageFile>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit" [disabled]="form.invalid">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
