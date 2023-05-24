@@ -10,8 +10,8 @@ import { firstValueFrom } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-    @ViewChild('uploadFile')
-    uploadFile!: ElementRef
+    @ViewChild('imageFile')
+    imageFile!: ElementRef
 
     form!: FormGroup
     fb = inject(FormBuilder)
@@ -20,15 +20,14 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         this.form = this.fb.group({
             title: this.fb.control<string>('', [ Validators.required]),
-            file: this.fb.control<any>('', [ Validators.required])
+            file: this.fb.control<File | null>(null, [ Validators.required])
         })
     }
 
     upload() {
-        const f: File = this.uploadFile.nativeElement.files[0]
+        const f: File = this.imageFile.nativeElement.files[0]
         console.info(f)
         const data = this.form.value
-        this.form.get('file')?.patchValue({ file: f})
 
         firstValueFrom(this.uploadService.upload(data['title'], f)).then(
             result => {
